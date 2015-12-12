@@ -1,0 +1,6 @@
+<div class="well" id="<%= dom_id(bid) %>">
+  $<%= '%.2f' % bid.price %>
+  <div class="pull-right owned">
+    <%= bid.user.first_name %> <%= bid.user.last_name %>
+  </div>
+</div>

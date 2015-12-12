@@ -1,0 +1,19 @@
+// Place all the styles related to the auctions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.clickable_html {
+  cursor: pointer;
+}
+
+.clickable_html:hover {
+  border: 1px;
+  border-style: solid;
+  background-color: #DDDDDD;
+}
+
+
+
+.owned {
+  margin-right: 1%;
+}

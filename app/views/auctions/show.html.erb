@@ -1,0 +1,69 @@
+<p>
+  <strong>Title:</strong>
+  <%= @auction.title %>
+</p>
+
+<p>
+  <strong>Details:</strong>
+  <%= @auction.details %>
+</p>
+
+<p>
+  <strong>Ends on:</strong>
+  <%= @auction.ends_on %>
+</p>
+
+<% if @auction.reserve_price && current_user == @auction.user%>
+<p>
+  <strong>Reserve price:</strong>
+  $<%= '%.2f' % @auction.reserve_price %>
+</p>
+<% end %>
+
+<% if @auction.current_price %>
+<p>
+  <strong>Current price:</strong>
+  $<span id="current_price"><%= '%.2f' % @auction.current_price %></span>
+</p>
+<% end %>
+
+<% if @auction.winning_price && current_user == @auction.user%>
+<p>
+  <strong>Winning price:</strong>
+  $<span id="winning_price"><%= '%.2f' % @auction.winning_price %></span>
+</p>
+<% if @auction.winning_user %>
+  <p>
+    <strong>Winning user:</strong>
+    <span> <%= get_winning_user(@auction.winning_user).full_name %></span>
+  </p>
+<% end %>
+<% end %>
+
+
+<p>Created by: <%= @auction.user.first_name %> <%= @auction.user.last_name %></p>
+
+<p><span class="label <%= label_class(@auction.aasm_state) %>"><%= @auction.aasm_state.capitalize %></span></p>
+
+
+<% if @auction.may_reserve? %>
+  <%= link_to "Reserve", auction_reservings_path(@auction),
+              method: :post,
+              data:   {confirm: "Are you sure you want to set to reserved met?"},
+              class:  "btn btn-primary" %>
+<% end %>
+
+
+<%= link_to 'Edit', edit_auction_path(@auction) %> |
+<%= link_to 'Back', auctions_path %>
+
+<% if current_user != @auction.user %>
+  <h2 id="add_bid_heading">Add a Bid</h2>
+  <%= render "/bids/form" %>
+<% end %>
+<h2>Bids</h2>
+<div id="bids">
+  <% @bids.each do |bid| %>
+    <%= render "/bids/bid", bid: bid %>
+  <% end %>
+</div>

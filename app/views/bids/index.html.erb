@@ -1,0 +1,10 @@
+<h1 class="page-header">All Bids</h1>
+<div>
+  <% @bids.each do |bid| %>
+    <div class="well">
+        <%= bid.price %>
+        <% a = bid.auction %>
+        <div class="pull-right owned">by: <%= bid.user.full_name %>, for auction: <%= a.title %></div>
+    </div>
+  <% end %>
+</div>

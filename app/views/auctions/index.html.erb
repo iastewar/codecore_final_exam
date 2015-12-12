@@ -1,0 +1,16 @@
+<h1 class="page-header">Listing Auctions</h1>
+<%= link_to 'New Auction', new_auction_path %>
+<div>
+  <% @auctions.each do |p| %>
+    <div class="well clickable_html">
+        <%= p.title %>
+        <%= link_to "Show", auction_path(p), class: "btn btn-primary btn-sm pull-right", style: "display: none" %>
+        <% if can? :manage, p %>
+          <%= link_to "Edit", edit_auction_path(p), class: "btn btn-primary btn-sm pull-right"%>
+          <%= link_to "Destroy", p, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm pull-right" %>
+          <div class="pull-right owned">Owned </div>
+        <% end %>
+
+    </div>
+  <% end %>
+</div>
